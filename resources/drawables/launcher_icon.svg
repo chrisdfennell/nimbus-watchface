@@ -1,0 +1,33 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Deep elegant background -->
+  <rect width="48" height="48" rx="8" fill="#0A0C10"/>
+  <!-- Subtle outer ring -->
+  <circle cx="24" cy="24" r="21" stroke="#C5A26F" stroke-width="1.5" opacity="0.7"/>
+  <!-- Inner face -->
+  <circle cx="24" cy="24" r="18" fill="#111318" stroke="#3A3F50" stroke-width="1"/>
+  <!-- Elegant 12 markers -->
+  <g stroke="#C5A26F" stroke-width="1.8" stroke-linecap="round">
+    <line x1="24" y1="7" x2="24" y2="10"/>
+    <line x1="24" y1="38" x2="24" y2="41"/>
+    <line x1="7" y1="24" x2="10" y2="24"/>
+    <line x1="38" y1="24" x2="41" y2="24"/>
+  </g>
+  <!-- Thin elegant hour hand (pointing ~10:10) -->
+  <g stroke="#E8D5A3" stroke-width="2.5" stroke-linecap="round">
+    <line x1="24" y1="24" x2="16" y2="14"/>
+  </g>
+  <!-- Minute hand -->
+  <g stroke="#C5A26F" stroke-width="1.8" stroke-linecap="round">
+    <line x1="24" y1="24" x2="33" y2="18"/>
+  </g>
+  <!-- Center cap -->
+  <circle cx="24" cy="24" r="2.5" fill="#E8D5A3"/>
+  <!-- Subtle weather accent: small sun -->
+  <circle cx="37" cy="12" r="3.5" fill="#F4A261"/>
+  <g stroke="#F4A261" stroke-width="1" opacity="0.9">
+    <line x1="37" y1="7.2" x2="37" y2="5.5"/>
+    <line x1="37" y1="18.5" x2="37" y2="16.8"/>
+    <line x1="31.5" y1="12" x2="33.2" y2="12"/>
+    <line x1="40.8" y1="12" x2="42.5" y2="12"/>
+  </g>
+</svg>

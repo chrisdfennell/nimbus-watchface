@@ -1,0 +1,4 @@
+<properties>
+    <property id="ShowSeconds" type="boolean">true</property>
+    <property id="ColorTheme" type="number">3</property> <!-- Default Midnight Gold -->
+</properties>

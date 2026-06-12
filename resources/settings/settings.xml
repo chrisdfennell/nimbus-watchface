@@ -1,0 +1,20 @@
+<settings>
+    <!-- Show Seconds hand / display -->
+    <setting propertyKey="@Properties.ShowSeconds" title="@Strings.ShowSecondsTitle" prompt="@Strings.ShowSecondsTitle">
+        <settingConfig type="boolean" />
+    </setting>
+
+    <!-- Accent Color Theme -->
+    <setting propertyKey="@Properties.ColorTheme" title="@Strings.ColorThemeTitle" prompt="@Strings.ColorThemeTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.ThemeRoseGold</listEntry>
+            <listEntry value="1">@Strings.ThemeArctic</listEntry>
+            <listEntry value="2">@Strings.ThemeEmber</listEntry>
+            <listEntry value="3">@Strings.ThemeMidnightGold</listEntry>
+            <listEntry value="4">@Strings.ThemeForest</listEntry>
+            <listEntry value="5">@Strings.ThemeLavender</listEntry>
+            <listEntry value="6">@Strings.ThemePearl</listEntry>
+            <listEntry value="7">@Strings.ThemeSolar</listEntry>
+        </settingConfig>
+    </setting>
+</settings>

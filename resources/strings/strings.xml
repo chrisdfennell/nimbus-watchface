@@ -1,0 +1,17 @@
+<strings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://developer.garmin.com/downloads/connect-iq/resources.xsd">
+    <string id="AppName">Nimbus Digital</string>
+    
+    <!-- Core Display -->
+    <string id="ShowSecondsTitle">Show Seconds</string>
+    
+    <!-- Color Theme - Beautiful Palette -->
+    <string id="ColorThemeTitle">Accent Color</string>
+    <string id="ThemeRoseGold">Rose Gold</string>
+    <string id="ThemeArctic">Arctic Teal</string>
+    <string id="ThemeEmber">Ember Orange</string>
+    <string id="ThemeMidnightGold">Midnight Gold</string>
+    <string id="ThemeForest">Forest Green</string>
+    <string id="ThemeLavender">Lavender Mist</string>
+    <string id="ThemePearl">Pearl Silver</string>
+    <string id="ThemeSolar">Solar Amber</string>
+</strings>

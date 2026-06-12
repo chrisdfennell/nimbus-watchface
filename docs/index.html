@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nimbus Digital Watch Face — Premium Garmin Weather Dashboard</title>
+    <!-- Google Fonts for premium typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="glass-bg"></div>
+    <div class="container">
+        <!-- Main Header -->
+        <header>
+            <h1 class="logo">NIMBUS DIGITAL</h1>
+            <p class="subtitle">Interactive Weather Garmin Simulator</p>
+        </header>
+
+        <main class="showcase">
+            <!-- Left: Interactive Watch Canvas -->
+            <div class="watch-wrapper">
+                <div class="watch-chassis">
+                    <canvas id="watchCanvas" width="454" height="454"></canvas>
+                </div>
+            </div>
+
+            <!-- Right: Interactive Settings Panel -->
+            <div class="settings-panel">
+                <div class="section-title">Color Theme</div>
+                <div class="theme-grid">
+                    <button class="theme-btn active" data-theme="3" style="--gold: #C5A26F; --accent: #E8D5A3;">
+                        <span>Midnight Gold</span>
+                    </button>
+                    <button class="theme-btn" data-theme="0" style="--gold: #E8B4A0; --accent: #F5D5C8;">
+                        <span>Rose Gold</span>
+                    </button>
+                    <button class="theme-btn" data-theme="1" style="--gold: #5EB8B8; --accent: #A8E0E0;">
+                        <span>Arctic Teal</span>
+                    </button>
+                    <button class="theme-btn" data-theme="2" style="--gold: #E07A3D; --accent: #F5B88A;">
+                        <span>Ember Orange</span>
+                    </button>
+                    <button class="theme-btn" data-theme="4" style="--gold: #5C8A5E; --accent: #9DC29E;">
+                        <span>Forest Green</span>
+                    </button>
+                    <button class="theme-btn" data-theme="5" style="--gold: #A78BBA; --accent: #D4C1E8;">
+                        <span>Lavender Mist</span>
+                    </button>
+                    <button class="theme-btn" data-theme="6" style="--gold: #B8C4CE; --accent: #E6EBF0;">
+                        <span>Pearl Silver</span>
+                    </button>
+                    <button class="theme-btn" data-theme="7" style="--gold: #F4A261; --accent: #F8C58C;">
+                        <span>Solar Amber</span>
+                    </button>
+                </div>
+
+                <hr class="separator">
+
+                <div class="section-title">Device & Display States</div>
+                <div class="toggles-grid">
+                    <div class="control-group">
+                        <label class="control-label" for="sleepMode">
+                            <span>Always-On-Display (AOD)</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="sleepMode">
+                                <span class="slider"></span>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="showSeconds">
+                            <span>Show Seconds</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="showSeconds" checked>
+                                <span class="slider"></span>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="phoneConnected">
+                            <span>Phone Connected</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="phoneConnected" checked>
+                                <span class="slider"></span>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="solarCharging">
+                            <span>Solar Charging</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="solarCharging">
+                                <span class="slider"></span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <hr class="separator">
+
+                <div class="section-title">Weather Conditions</div>
+                <div class="weather-row">
+                    <div class="control-group">
+                        <label class="dropdown-label" for="weatherCondition">Condition Preset</label>
+                        <select id="weatherCondition" class="styled-select">
+                            <option value="CLEAR">Sunny / Clear</option>
+                            <option value="CLOUDY" selected>Cloudy</option>
+                            <option value="RAINY">Rainy</option>
+                            <option value="SNOWY">Snowy</option>
+                            <option value="STORMY">Stormy</option>
+                            <option value="WINDY">Windy</option>
+                            <option value="FOGGY">Foggy</option>
+                            <option value="MIXED">Wintry Mix</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group flex-range">
+                        <label class="slider-label">
+                            <span>Temperature</span>
+                            <span id="tempVal">57°F</span>
+                        </label>
+                        <input type="range" id="tempInput" min="-10" max="110" step="1" value="57" class="styled-slider">
+                    </div>
+                </div>
+
+                <hr class="separator">
+
+                <div class="section-title">Activity & Device Sensors</div>
+                <div class="sensors-scroll-area">
+                    <div class="sensor-grid">
+                        <div class="control-group">
+                            <label class="slider-label">
+                                <span>Simulated Steps</span>
+                                <span id="stepsVal">8,400</span>
+                            </label>
+                            <input type="range" id="stepsInput" min="0" max="25000" step="100" value="8400" class="styled-slider">
+                        </div>
+
+                        <div class="control-group">
+                            <label class="slider-label">
+                                <span>Heart Rate</span>
+                                <span id="hrVal">76 BPM</span>
+                            </label>
+                            <input type="range" id="hrInput" min="40" max="180" step="1" value="76" class="styled-slider">
+                        </div>
+
+                        <div class="control-group">
+                            <label class="slider-label">
+                                <span>Battery Level</span>
+                                <span id="batteryVal">50%</span>
+                            </label>
+                            <input type="range" id="batteryInput" min="0" max="100" step="1" value="50" class="styled-slider">
+                        </div>
+
+                        <div class="control-group">
+                            <label class="slider-label">
+                                <span>Calories (CAL)</span>
+                                <span id="calVal">320 kcal</span>
+                            </label>
+                            <input type="range" id="calInput" min="0" max="1500" step="10" value="320" class="styled-slider">
+                        </div>
+
+                        <div class="control-group">
+                            <label class="slider-label">
+                                <span>Distance</span>
+                                <span id="distanceVal">4.25 mi</span>
+                            </label>
+                            <input type="range" id="distanceInput" min="0" max="15" step="0.05" value="4.25" class="styled-slider">
+                        </div>
+
+                        <div class="control-group">
+                            <label class="slider-label">
+                                <span>Floors Climbed</span>
+                                <span id="floorsVal">8</span>
+                            </label>
+                            <input type="range" id="floorsInput" min="0" max="40" step="1" value="8" class="styled-slider">
+                        </div>
+
+                        <div class="control-group">
+                            <label class="slider-label">
+                                <span>Active Minutes</span>
+                                <span id="activeVal">45 min</span>
+                            </label>
+                            <input type="range" id="activeInput" min="0" max="180" step="1" value="45" class="styled-slider">
+                        </div>
+
+                        <div class="control-group">
+                            <label class="slider-label">
+                                <span>Notifications</span>
+                                <span id="notesVal">0</span>
+                            </label>
+                            <input type="range" id="notesInput" min="0" max="10" step="1" value="0" class="styled-slider">
+                        </div>
+
+                        <div class="control-group">
+                            <label class="slider-label">
+                                <span>Alarm Count</span>
+                                <span id="alarmsVal">0</span>
+                            </label>
+                            <input type="range" id="alarmsInput" min="0" max="5" step="1" value="0" class="styled-slider">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Designed for Garmin Wearables. View source on <a href="https://github.com/chrisdfennell/Aether" target="_blank">GitHub</a>.</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

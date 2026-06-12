@@ -1,0 +1,426 @@
+/* Aether Luxury Preview CSS Styling */
+:root {
+    --bg-dark: #05070A;
+    --card-bg: rgba(15, 20, 28, 0.65);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --text-primary: #F0F4F8;
+    --text-muted: #8E9AAB;
+    --accent-gold: #C5A26F;
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-condensed: 'Roboto Condensed', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Luxury abstract animated background */
+.glass-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(197, 162, 111, 0.12) 0%, rgba(94, 184, 184, 0.04) 50%, transparent 100%);
+    z-index: 0;
+    pointer-events: none;
+    filter: blur(80px);
+}
+
+.container {
+    width: 100%;
+    max-width: 1100px;
+    padding: 30px 20px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Header style */
+header {
+    text-align: center;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: 0.35em;
+    background: linear-gradient(135deg, #FFF 30%, var(--accent-gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 6px;
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* Showcase grid layout */
+.showcase {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+/* Watch chassis mockup styling */
+.watch-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.watch-chassis {
+    width: 480px;
+    height: 480px;
+    background: radial-gradient(circle at center, #262B34 0%, #151920 60%, #080A0E 100%);
+    border-radius: 50%;
+    padding: 13px;
+    box-shadow: 
+        0 15px 40px rgba(0, 0, 0, 0.6),
+        inset 0 4px 10px rgba(255, 255, 255, 0.15),
+        inset 0 -4px 15px rgba(0, 0, 0, 0.8);
+    position: relative;
+    border: 3px solid #1C2028;
+}
+
+/* Simulated Bezel screws and indices */
+.watch-chassis::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border: 2px solid #000;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: var(--bg-dark);
+}
+
+/* Settings panel styling */
+.settings-panel {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 5px;
+}
+
+/* Color theme button styling */
+.theme-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.theme-btn {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 12px;
+    color: var(--text-muted);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.theme-btn::before {
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--gold);
+    box-shadow: 0 0 6px var(--accent);
+}
+
+.theme-btn:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.15);
+    color: var(--text-primary);
+}
+
+.theme-btn.active {
+    background: rgba(197, 162, 111, 0.15);
+    border-color: var(--gold);
+    color: #FFF;
+    font-weight: 600;
+}
+
+.separator {
+    border: none;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+    margin: 5px 0;
+}
+
+/* Form controls styling */
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.control-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+.control-label span {
+    transition: color 0.2s ease;
+}
+
+.control-label:hover span {
+    color: var(--text-primary);
+}
+
+/* Custom switch toggle */
+.toggle-switch {
+    position: relative;
+    width: 44px;
+    height: 24px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.15);
+    transition: .3s;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .3s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--accent-gold);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px var(--accent-gold);
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
+}
+
+/* Custom range slider styling */
+.slider-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.slider-label span:last-child {
+    font-family: var(--font-condensed);
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.styled-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 5px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    outline: none;
+    transition: background .2s;
+}
+
+.styled-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--accent-gold);
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.styled-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.toggles-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 15px;
+}
+
+.weather-row {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 15px;
+    align-items: flex-end;
+}
+
+.dropdown-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+}
+
+.styled-select {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    outline: none;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.styled-select:focus {
+    border-color: var(--accent-gold);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.styled-select option {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+}
+
+.sensors-scroll-area {
+    max-height: 220px;
+    overflow-y: auto;
+    padding-right: 8px;
+    margin-top: 5px;
+}
+
+/* Styled Scrollbar */
+.sensors-scroll-area::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sensors-scroll-area::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 3px;
+}
+
+.sensors-scroll-area::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 3px;
+}
+
+.sensors-scroll-area::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-gold);
+}
+
+.sensor-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Footer layout */
+footer {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+footer a {
+    color: var(--accent-gold);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responsiveness adjustments */
+@media (max-width: 900px) {
+    .showcase {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .watch-chassis {
+        width: 360px;
+        height: 360px;
+        padding: 10px;
+    }
+}
