@@ -1,8 +1,18 @@
 # Nimbus Digital — Premium Garmin Weather-First Dashboard
 
+<p align="center">
+  <img src="assets/cover_image.png" alt="Nimbus Digital" width="640">
+</p>
+
 Nimbus Digital is a premium, data-driven, weather-first digital watch face for Garmin Connect IQ. It is designed to provide an information-rich dashboard experience that remains highly legible, optimized for both MIP and AMOLED displays (Fenix, Epix, Venu, Forerunner, etc.).
 
 By presenting current weather conditions, a full 5-day forecast, activity metrics, and device status in a clean, unified dashboard, Nimbus Digital ensures you have all critical information available at a single glance.
+
+<p align="center">
+  <img src="assets/screen_active.png" alt="Nimbus Digital watch face" width="300">
+  &nbsp;&nbsp;&nbsp;
+  <img src="assets/app_icon_hero.png" alt="Nimbus Digital on device" width="300">
+</p>
 
 ## Design Aesthetics & Philosophy
 - **Clean Digital Interface**: Large, high-visibility digital clock featuring a split-color layout (hour in accent theme, minutes in white/silver).
