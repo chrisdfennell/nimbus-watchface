@@ -149,7 +149,7 @@ class NimbusView extends WatchUi.WatchFace {
         cy += burnInY;
 
         // 1. Draw Header Status Row (Always visible)
-        drawHeader(dc, cx, h * 0.08, accent, deviceSettings);
+        drawHeader(dc, cx, h * 0.13, accent, deviceSettings);
 
         // 2. Draw Digital Time & Date (Always visible)
         drawTimeAndDate(dc, cx, h * 0.24, h * 0.36, accent, highlight, burnInActive);

@@ -4,7 +4,7 @@ All notable changes to Nimbus Digital are documented here. The format is based o
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project aims to
 follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.0.2] - 2026-06-13
 
 ### Changed
 - Improved legibility on MIP / transflective displays: larger date, temperature,
@@ -17,9 +17,11 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Weather detail metrics (precipitation, humidity, wind) are now measured and
   centered as a single row so wind speed no longer overflows the right edge on
   round screens.
+- Moved the header status row down (`h * 0.08` → `h * 0.13`) so the battery,
+  solar, and phone icons no longer clip off the top/sides of round displays.
 
 ### Removed
 - Redundant text condition label under the current weather (the icon already
   conveys the condition), freeing vertical space.
 
-[Unreleased]: ../../compare/main...HEAD
+[1.0.2]: ../../releases/tag/v1.0.2
