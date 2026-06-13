@@ -24,7 +24,6 @@ Desktop.ini
 
 # Local/temporary script files
 compress.ps1
-savescreenshot.ps1
 *.tmp
 /temp*
 
