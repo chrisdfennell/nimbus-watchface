@@ -90,3 +90,28 @@ The build script will automatically compile, copy setting schemas, and run `monk
 - `resources/strings/strings.xml` — Text labels and localization settings.
 - `assets/` — Promotional materials, store screenshots, and branding templates.
 - `docs/` — Interactive web simulator landing page.
+
+## Releasing
+
+Releases are built automatically by [`.github/workflows/release.yml`](.github/workflows/release.yml).
+Push a version tag and the workflow compiles a side-loadable `.prg` and a
+store-ready `.iq`, then attaches both to a GitHub Release:
+
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+The only one-time setup is a `GARMIN_DEVELOPER_KEY` repository secret (your
+base64-encoded developer key) — the SDK ships inside the build container, so
+nothing else is needed. See the header comment in the workflow file.
+
+## Contributing
+
+Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for setup, build,
+and testing guidelines, and please follow the [Code of Conduct](CODE_OF_CONDUCT.md).
+Security issues should be reported privately per [SECURITY.md](SECURITY.md).
+
+## License
+
+Released under the [MIT License](LICENSE).

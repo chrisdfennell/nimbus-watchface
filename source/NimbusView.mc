@@ -92,11 +92,11 @@ class NimbusView extends WatchUi.WatchFace {
             var faceRegular = ["RobotoCondensedRegular", "RobotoRegular", "sans-serif"] as Array<String>;
 
             mFontTime = Graphics.getVectorFont({ :face => face, :size => (mScreenWidth * 0.17).toNumber() });
-            mFontDate = Graphics.getVectorFont({ :face => face, :size => (mScreenWidth * 0.048).toNumber() });
-            mFontTemp = Graphics.getVectorFont({ :face => face, :size => (mScreenWidth * 0.09).toNumber() });
-            mFontCond = Graphics.getVectorFont({ :face => faceRegular, :size => (mScreenWidth * 0.044).toNumber() });
-            mFontLabel = Graphics.getVectorFont({ :face => faceRegular, :size => (mScreenWidth * 0.036).toNumber() });
-            mFontValue = Graphics.getVectorFont({ :face => face, :size => (mScreenWidth * 0.043).toNumber() });
+            mFontDate = Graphics.getVectorFont({ :face => face, :size => (mScreenWidth * 0.058).toNumber() });
+            mFontTemp = Graphics.getVectorFont({ :face => face, :size => (mScreenWidth * 0.105).toNumber() });
+            mFontCond = Graphics.getVectorFont({ :face => faceRegular, :size => (mScreenWidth * 0.052).toNumber() });
+            mFontLabel = Graphics.getVectorFont({ :face => face, :size => (mScreenWidth * 0.046).toNumber() });
+            mFontValue = Graphics.getVectorFont({ :face => face, :size => (mScreenWidth * 0.054).toNumber() });
         }
         
         // Safety Fallbacks in case vector fonts failed to load or are unsupported
@@ -447,54 +447,68 @@ class NimbusView extends WatchUi.WatchFace {
         // High/Low and Secondary metrics (Right-ish)
         var metricsY = currentY - 8;
         var hiLoStr = "H:" + ((todayHigh != null) ? formatTempRaw(todayHigh) : "--°") + " L:" + ((todayLow != null) ? formatTempRaw(todayLow) : "--°");
-        dc.setColor(grayColor, Graphics.COLOR_TRANSPARENT);
+        dc.setColor(0xE6EBF0, Graphics.COLOR_TRANSPARENT);
         dc.drawText(cx + 40, metricsY, fontValue, hiLoStr, Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER);
 
-        // Extra details: humidity, wind speed, precip drawn programmatically to avoid unsupported font glyphs
-        var detailX = cx + 40;
-        var detailY = metricsY + 17;
-        var elementGap = 12;
+        // Extra details: precip, humidity, wind drawn as a CENTERED row below the temp so
+        // nothing runs off the right edge (a big problem on round MIP screens).
+        var detailY = currentY + 22;
+        var elementGap = 14;
         var iconGap = 4;
 
+        // Collect the metrics that are actually available (kind: 0=precip, 1=humidity, 2=wind)
+        var dKind = [-1, -1, -1];
+        var dText = ["", "", ""];
+        var dCount = 0;
+
         if (precipChance != null) {
-            var prcText = precipChance.format("%d") + "%";
-            drawRaindropIcon(dc, detailX, detailY, accentColor);
-            detailX += 8 + iconGap;
-            dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(detailX, detailY, fontCond, prcText, Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER);
-            detailX += dc.getTextWidthInPixels(prcText, fontCond) + elementGap;
+            dKind[dCount] = 0;
+            dText[dCount] = precipChance.format("%d") + "%";
+            dCount++;
         }
-
         if (humidity != null) {
-            var humText = humidity.format("%d") + "%";
-            drawHumidityIcon(dc, detailX, detailY, grayColor);
-            detailX += 8 + iconGap;
-            dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(detailX, detailY, fontCond, humText, Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER);
-            detailX += dc.getTextWidthInPixels(humText, fontCond) + elementGap;
+            dKind[dCount] = 1;
+            dText[dCount] = humidity.format("%d") + "%";
+            dCount++;
         }
-
         if (windSpeed != null && windSpeed > 0) {
-            var speedVal = windSpeed;
             var systemSettings = System.getDeviceSettings();
-            var windText = "";
+            var windText;
             if (systemSettings.distanceUnits == System.UNIT_STATUTE) {
-                speedVal = windSpeed * 2.23694;
-                windText = speedVal.toNumber().toString() + " mph";
+                windText = (windSpeed * 2.23694).toNumber().toString() + " mph";
             } else {
-                speedVal = windSpeed * 3.6;
-                windText = speedVal.toNumber().toString() + " kmh";
+                windText = (windSpeed * 3.6).toNumber().toString() + " kmh";
             }
-            drawWindIcon(dc, detailX, detailY, accentColor);
-            detailX += 11 + iconGap;
-            dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(detailX, detailY, fontCond, windText, Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER);
+            dKind[dCount] = 2;
+            dText[dCount] = windText;
+            dCount++;
         }
 
-        // Weather condition label (centered below current conditions)
-        var condLabelStr = getWeatherLabel(curCategory);
-        dc.setColor(accentColor, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(cx, currentY + 26, fontCond, condLabelStr, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        // Measure total width so the row can be centered
+        var totalW = 0;
+        for (var i = 0; i < dCount; i++) {
+            var iw = (dKind[i] == 2) ? 11 : 8;
+            totalW += iw + iconGap + dc.getTextWidthInPixels(dText[i], fontCond);
+            if (i > 0) { totalW += elementGap; }
+        }
+
+        var dx = cx - (totalW / 2);
+        for (var i = 0; i < dCount; i++) {
+            if (i > 0) { dx += elementGap; }
+            var kind = dKind[i];
+            var iw = (kind == 2) ? 11 : 8;
+            if (kind == 0) {
+                drawRaindropIcon(dc, dx, detailY, accentColor);
+            } else if (kind == 1) {
+                drawHumidityIcon(dc, dx, detailY, 0x9DB4C8);
+            } else {
+                drawWindIcon(dc, dx, detailY, accentColor);
+            }
+            dx += iw + iconGap;
+            dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+            dc.drawText(dx, detailY, fontCond, dText[i], Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER);
+            dx += dc.getTextWidthInPixels(dText[i], fontCond);
+        }
 
 
         // B. Draw 5-Day Forecast Row
@@ -525,7 +539,7 @@ class NimbusView extends WatchUi.WatchFace {
                 // Day Label (e.g. MON)
                 var fInfo = Gregorian.info(fTime, Time.FORMAT_MEDIUM);
                 var fDayStr = fInfo.day_of_week.toUpper();
-                dc.setColor(0xB8C4CE, Graphics.COLOR_TRANSPARENT);
+                dc.setColor(0xE6EBF0, Graphics.COLOR_TRANSPARENT);
                 dc.drawText(colX, forecastY - 4, fontLabel, fDayStr, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
 
                 // Icon
@@ -888,7 +902,7 @@ class NimbusView extends WatchUi.WatchFace {
 
     function drawHumidityIcon(dc as Dc, x as Number, y as Number, color as Number) as Void {
         dc.setColor(color, Graphics.COLOR_TRANSPARENT);
-        dc.setPenWidth(1);
+        dc.setPenWidth(2);
         dc.drawCircle(x + 4, y + 2, 2);
         dc.drawLine(x + 2, y + 2, x + 4, y - 3);
         dc.drawLine(x + 6, y + 2, x + 4, y - 3);
@@ -896,7 +910,7 @@ class NimbusView extends WatchUi.WatchFace {
 
     function drawWindIcon(dc as Dc, x as Number, y as Number, color as Number) as Void {
         dc.setColor(color, Graphics.COLOR_TRANSPARENT);
-        dc.setPenWidth(1);
+        dc.setPenWidth(2);
         dc.drawLine(x, y - 2, x + 9, y - 2);
         dc.drawLine(x + 2, y, x + 11, y);
         dc.drawLine(x + 1, y + 2, x + 7, y + 2);
